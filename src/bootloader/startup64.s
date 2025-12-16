@@ -2,7 +2,8 @@
 .global _start
 _start:
     /* Vector table emulation - QEMU jumps here from 0x0 */
-    ldr sp, =stack_top
+    ldr x30, =stack_top
+    mov sp, x30
     bl kernel_main 
     b .
 

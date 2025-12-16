@@ -1,5 +1,8 @@
+// Get the UART0 physical address at compile time (passed from build.zig)
+pub const UART0_ADDR: comptime_int = @import("build_options").UART0_ADDR;
+
 // Define the UART0 data register address as a volatile pointer
-const UART0DR: *volatile u32 = @ptrFromInt(0x101f1000);
+const UART0DR: *volatile u32 = @ptrFromInt(UART0_ADDR);
 
 pub fn print_uart0(s: [*:0]const u8) void {
     var p = s;
@@ -8,6 +11,6 @@ pub fn print_uart0(s: [*:0]const u8) void {
     }
 }
 
-pub export fn zig_entry() void {
+pub export fn kernel_main() void {
     print_uart0("Hello world!\n");
 }
