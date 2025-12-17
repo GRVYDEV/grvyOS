@@ -27,8 +27,6 @@ pub fn build(b: *std.Build) void {
             .root_source_file = b.path("src/main.zig"),
             .target = target_32,
             .link_libc = false,
-            // NOTE: this is needed otherwise the elf entrypoint does not work
-            .optimize = .ReleaseSmall,
             .strip = true,
         }),
     });
@@ -42,8 +40,6 @@ pub fn build(b: *std.Build) void {
             .root_source_file = b.path("src/main.zig"),
             .target = target_64,
             .link_libc = false,
-            // NOTE: this is needed otherwise the elf entrypoint does not work
-            .optimize = .ReleaseSmall,
             .strip = true,
         }),
     });
