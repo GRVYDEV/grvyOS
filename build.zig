@@ -24,7 +24,7 @@ pub fn build(b: *std.Build) void {
     const exe32 = b.addExecutable(.{
         .name = "kernel32.elf",
         .root_module = b.createModule(.{
-            .root_source_file = b.path("src/main.zig"),
+            .root_source_file = b.path("src/kernel/kernel.zig"),
             .target = target_32,
             .link_libc = false,
             .strip = true,
@@ -37,7 +37,7 @@ pub fn build(b: *std.Build) void {
     const exe64 = b.addExecutable(.{
         .name = "kernel64.elf",
         .root_module = b.createModule(.{
-            .root_source_file = b.path("src/main.zig"),
+            .root_source_file = b.path("src/kernel/kernel.zig"),
             .target = target_64,
             .link_libc = false,
             .strip = true,

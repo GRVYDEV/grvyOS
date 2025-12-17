@@ -17,14 +17,6 @@ const UART_EN = 0;
 const UART_TXE = 8;
 const UART_RXE = 9;
 
-pub fn print_uart0(s: [*:0]const u8) void {
-    var p = s;
-    while (p[0] != 0) : (p += 1) { // Use indexing and increment in while clause
-        while ((UART0_FR.* & (1 << 5)) != 0) {} // TXFFR = Transmit FIFO Full
-        UART0DR.* = p[0]; // Transmit character
-    }
-}
-
 pub fn raw_uart_putc(c: u8) void {
     while ((UART0_FR.* & (1 << 5)) != 0) {} // Wait TX ready
     UART0DR.* = c;
@@ -33,9 +25,7 @@ pub fn raw_uart_putc(c: u8) void {
 pub fn raw_uart_puts(s: [*:0]const u8) void {
     var p = s;
     while (p[0] != 0) : (p += 1) {
-        // raw_uart_putc(p[0]);
-        while ((UART0_FR.* & (1 << 5)) != 0) {} // Wait TX ready
-        UART0DR.* = p[0];
+        raw_uart_putc(p[0]);
     }
 }
 
